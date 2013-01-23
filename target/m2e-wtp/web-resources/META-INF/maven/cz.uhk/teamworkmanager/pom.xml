@@ -32,19 +32,15 @@
 			<version>3.6.10.Final</version>
 		</dependency>
 		
-        <!-- ??? -->
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.8.0.GA</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.6</version>
-        </dependency>
-
-		<!-- Spring -->
+		<!-- 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+        -->
+        
+        <!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -68,7 +64,49 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>3.1.2.RELEASE</version>
 		</dependency>
-				
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-hibernate</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>20030825.184428</version>
+		</dependency>
+        
+	    <dependency>
+	      <groupId>commons-pool</groupId>
+	      <artifactId>commons-pool</artifactId>
+	      <version>20030825.183949</version>
+	    </dependency>
+        
+        <!-- ??? -->
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.8.0.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

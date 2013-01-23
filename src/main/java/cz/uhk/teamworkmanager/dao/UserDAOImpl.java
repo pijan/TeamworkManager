@@ -2,35 +2,31 @@ package cz.uhk.teamworkmanager.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.uhk.teamworkmanager.model.User;
-import cz.uhk.teamworkmanager.util.HibernateUtil;
 
+@Repository
+@Transactional //???
 public class UserDAOImpl implements UserDAO {
 	
-	Session session;
+	//@Autowired
+    private SessionFactory sf;
 	
-	public UserDAOImpl(Session s) {
-		session = s;
-	}
-	
-	@Override
 	public void saveUser(User user) {
-		System.out.println(session.toString());
-		session.beginTransaction();
-		session.save(user);
-		session.getTransaction().commit();
+		sf.getCurrentSession().beginTransaction();
+		sf.getCurrentSession().save(user);
+		sf.getCurrentSession().getTransaction().commit();
 	}
 
-	@Override
 	public List<User> listUser() {
-		session.beginTransaction();
-		List result = session.createCriteria(User.class).list();
-	    session.getTransaction().commit();
+		sf.getCurrentSession().beginTransaction();
+		List result = sf.getCurrentSession().createCriteria(User.class).list();
+		sf.getCurrentSession().getTransaction().commit();
 		return result;
-	    
 	}
 
 }

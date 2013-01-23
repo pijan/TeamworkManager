@@ -18,7 +18,7 @@ import cz.uhk.teamworkmanager.model.User;
 @RequestMapping("/notebook")
 public class NotebookController extends BaseController {
 
-	NoticeDAOImpl noticeDAO = new NoticeDAOImpl(this.session);
+	//NoticeDAOImpl noticeDAO = new NoticeDAOImpl(this.session);
 	
 	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	public String notebook(@PathVariable String name, Locale locale, Model model) {
@@ -32,6 +32,7 @@ public class NotebookController extends BaseController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String notebookList(Locale locale, Model model) {
 		
+		/*
 		Notice n = new Notice("Poznámka");
 		noticeDAO.saveNotice(n);
 		
@@ -39,7 +40,7 @@ public class NotebookController extends BaseController {
 		for ( Notice ntc : (List<Notice>) result ) {
 			System.out.println( "Poznamka (" + ntc.getText() + ")" );
 		}
-		
+		*/
 		return "notebook"; 
 	}
 	
