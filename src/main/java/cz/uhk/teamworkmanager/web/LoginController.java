@@ -1,4 +1,4 @@
-package cz.uhk.teamworkmanager;
+package cz.uhk.teamworkmanager.web;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class LoginController extends BaseController {
 	@Autowired
     UserService userService;
 	
-	//@Autowired
+	@Autowired
     MyBeanClass m;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -40,19 +40,21 @@ public class LoginController extends BaseController {
 		
 		//vložení uživatelů do DB
 		User u = new User( "Michal Klapal", "michal", "password", 7, 1, "michalklapal@gmail.com");
-		//userService.saveUser(u);
+		userService.saveUser(u);
 		//session.beginTransaction();
 		//userService.saveUser(u);
 		//session.getTransaction().commit();
 		
 		//session.beginTransaction();
 		//List result = session.createCriteria(User.class).list();
-		//List result = userService.listUser();
-		/*
+		List result = userService.listUser();
+		
+		System.out.println("Uzivatele:");
+		
 		for ( User usr : (List<User>) result ) {
 			System.out.println( "User (" + usr.getName() + ") : " + usr.getLogin() );
 		}
-		*/
+				
         //session.getTransaction().commit();
         
         //je vůbec nutné?
@@ -63,7 +65,7 @@ public class LoginController extends BaseController {
         //MyBeanClass m = ctx.getBean(MyBeanClass.class);
         //System.out.println(m.getAbc());
         
-        //System.out.println(m.getAbc());
+        System.out.println(m.getAbc());
         
 		return "login"; 
 		

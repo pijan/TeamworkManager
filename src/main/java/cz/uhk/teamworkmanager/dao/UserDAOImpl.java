@@ -13,19 +13,19 @@ import cz.uhk.teamworkmanager.model.User;
 @Transactional //???
 public class UserDAOImpl implements UserDAO {
 	
-	//@Autowired
-    private SessionFactory sf;
+	@Autowired
+    private SessionFactory sessionFactory;
 	
 	public void saveUser(User user) {
-		sf.getCurrentSession().beginTransaction();
-		sf.getCurrentSession().save(user);
-		sf.getCurrentSession().getTransaction().commit();
+		//sessionFactory.getCurrentSession().beginTransaction();
+		sessionFactory.getCurrentSession().save(user);
+		//sessionFactory.getCurrentSession().getTransaction().commit();
 	}
 
 	public List<User> listUser() {
-		sf.getCurrentSession().beginTransaction();
-		List result = sf.getCurrentSession().createCriteria(User.class).list();
-		sf.getCurrentSession().getTransaction().commit();
+		//sessionFactory.getCurrentSession().beginTransaction();
+		List result = sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		//sessionFactory.getCurrentSession().getTransaction().commit();
 		return result;
 	}
 

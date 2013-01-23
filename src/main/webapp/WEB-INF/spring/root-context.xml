@@ -38,14 +38,10 @@
 	
 	
 	
+	<context:annotation-config />
+    <context:component-scan base-package="cz.uhk.teamworkmanager.web.dao" />
+    <context:component-scan base-package="cz.uhk.teamworkmanager.web.service" />
 	
-	
-	
-	
-	
-	
-	<!-- 
-
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	    
@@ -55,7 +51,10 @@
 	</bean>
 	
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" >
+	
+		<!-- class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" -->
+		
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation">
 			<value>classpath:hibernate.cfg.xml</value>
@@ -65,13 +64,29 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">${dialect}</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+	
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>    
+    
+    <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionAttributeSource">
+            <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource" />
+        </property>
+    </bean>
+
+    <bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
+        <constructor-arg index="0" ref="transactionInterceptor"/>
+    </bean>
+    
+    
+     
 
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 	    <property name="sessionFactory"><ref local="sessionFactory"/></property>
@@ -80,5 +95,11 @@
 	<bean id="myBean" class="cz.uhk.teamworkmanager.util.MyBeanClass">
 		<property name="abc" value="13"/>
 	</bean>
-	 -->
+	
+	<bean id="userService" class="cz.uhk.teamworkmanager.service.UserServiceImpl"></bean>
+    <bean id="userDAO" class="cz.uhk.teamworkmanager.dao.UserDAOImpl"></bean>
+	
+	
+	
+	
 </beans>

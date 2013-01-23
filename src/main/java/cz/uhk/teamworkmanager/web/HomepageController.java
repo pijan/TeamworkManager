@@ -1,4 +1,4 @@
-package cz.uhk.teamworkmanager;
+package cz.uhk.teamworkmanager.web;
 
 import java.util.Locale;
 
