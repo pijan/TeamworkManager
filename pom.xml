@@ -55,7 +55,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
+			<artifactId>spring-webmvc</artifactId>			
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
@@ -83,6 +83,8 @@
 			<version>1.2.9</version>
 		</dependency>
 		
+		
+	
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
