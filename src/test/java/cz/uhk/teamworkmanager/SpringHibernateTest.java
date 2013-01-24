@@ -67,8 +67,8 @@ public class SpringHibernateTest extends TestCase {
 		Session session = cz.uhk.teamworkmanager.util.HibernateUtil.getSessionFactory().openSession();
 		//Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.save( new User( "Our very first event!" ) );
-		session.save( new User( "A follow up event" ) );
+		//session.save( new User( "Our very first event!" ) );
+		//session.save( new User( "A follow up event" ) );
 		session.getTransaction().commit();
 		session.close();
 
@@ -80,7 +80,7 @@ public class SpringHibernateTest extends TestCase {
 		List result = session.createCriteria(User.class).list();
 		
 		for ( User usr : (List<User>) result ) {
-			System.out.println( "User (" + usr.getName() + ") : " + usr.getLogin() );
+			//System.out.println( "User (" + usr.getName() + ") : " + usr.getLogin() );
 		}
         session.getTransaction().commit();
         session.close();

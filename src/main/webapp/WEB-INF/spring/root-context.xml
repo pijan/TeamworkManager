@@ -39,8 +39,9 @@
 	
 	
 	<context:annotation-config />
-    <context:component-scan base-package="cz.uhk.teamworkmanager.web.dao" />
-    <context:component-scan base-package="cz.uhk.teamworkmanager.web.service" />
+    <context:component-scan base-package="cz.uhk.teamworkmanager.dao" />
+    <context:component-scan base-package="cz.uhk.teamworkmanager.service" />
+    
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -66,10 +67,13 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="current_session_context_class">thread</prop>
+                <prop key="cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>
-
+				
 	<!--
 	 <tx:annotation-driven transaction-manager="transactionManager"/> 
 	-->
@@ -87,8 +91,8 @@
     </bean>
     
     
-     
-
+    
+    
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 	    <property name="sessionFactory"><ref local="sessionFactory"/></property>
 	</bean>

@@ -27,8 +27,11 @@
         
         -->
        
+       
+       
         <mapping class="cz.uhk.teamworkmanager.model.BaseEntity"/>
         <mapping class="cz.uhk.teamworkmanager.model.User"/>
+        <mapping class="cz.uhk.teamworkmanager.model.Authority"/>
         <mapping class="cz.uhk.teamworkmanager.model.Event"/>
         <mapping class="cz.uhk.teamworkmanager.model.Notice"/>
         <mapping class="cz.uhk.teamworkmanager.model.Task"/>

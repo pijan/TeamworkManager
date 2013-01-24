@@ -1,102 +1,126 @@
 package cz.uhk.teamworkmanager.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table( name = "users" )
-public class User extends BaseEntity {
+public class User implements Serializable, UserDetails {
 	
-	/*
-	 * Třída obsahující základní informace o uživateli
-	 * 
-	 * TODO dořešit projectGroup, permissions, ...
-	 * 
-	 */
-
-	String name;
-	String login;
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	String username;
 	String password;
-	int permissions;
-	int projectGroup;
-	String lastLogin;
-	String email;
+	int enabled;
+	
+	@OneToOne
+    @JoinColumn(name="username")
+    private Authority authority;
 	
 	public User(){
 		
 	}
 	
-	public User(String name){
-		this.name = name;
-	}
-	
-	public User(String name, String login, String password, int permissions, int projectGroup, String email){
-		this.name = name;
-		this.login = login;
+	public User(String username, String password, int enabled){
+		this.username = username;
 		this.password = password;
-		this.permissions = permissions;
-		this.projectGroup = projectGroup;
-		this.email = email;
+		this.enabled = enabled;
 	}
 	
-	
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
+
 	public String getPassword() {
+		System.out.println("Nekdo cte heslo");
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getPermissions() {
-		return permissions;
-	}
-	public void setPermissions(int permissions) {
-		this.permissions = permissions;
-	}
-	public int getProjectGroup() {
-		return projectGroup;
-	}
-	public void setProjectGroup(int projectGroup) {
-		this.projectGroup = projectGroup;
-	}
-	public String getLastLogin() {
-		return lastLogin;
-	}
-	public void setLastLogin(String lastLogin) {
-		this.lastLogin = lastLogin;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public int getEnabled() {
+		return enabled;
 	}
 	
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
 	public String toString(){
-		return "User ID: " 
-				+ this.getId() + ", " 
-				+ this.getName() + ", "
-				+ this.getLogin() + ", "
+		return "User: " 
+				+ this.getUsername() + ", "
 				+ this.getPassword() + ", "
-				+ this.getPermissions() + ", "
-				+ this.getProjectGroup() + ", "
-				+ this.getLastLogin() + ", "
-				+ this.getEmail() + "\n";
+				+ this.getEnabled() + "\n";
+	}
+	
+	
+	public List<GrantedAuthority> setAuthorities(List<Authority> auths) { 
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(); 
+		
+		for (Authority auth : auths) grantedAuthorities.add((GrantedAuthority) new GrantedAuthorityImpl(auth.getUsername())); 
+		
+		return grantedAuthorities; 
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+		
+		grantedAuthorities.add(new GrantedAuthorityImpl(this.authority.getAuthority()));
+		
+		return grantedAuthorities; 
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	public Authority getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Authority authority) {
+		this.authority = authority;
 	}
 	
 }

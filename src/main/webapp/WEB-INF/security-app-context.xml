@@ -11,17 +11,20 @@
     <http pattern="/login/*" security="none"/>
     
     <http use-expressions="true">
-	    <intercept-url pattern="/settings/**" access="hasRole('admin')" />
-	    <intercept-url pattern="/**" access="hasRole('user')" />
+	    <intercept-url pattern="/settings/**" access="hasRole('ROLE_ADMIN')" />
+	    <intercept-url pattern="/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
 	    <form-login login-page='/login/' authentication-failure-url='/login/?login_error'/>
 	    <logout />
 	</http>
 		
 	<beans:bean id="authenticationProvider" class="cz.uhk.teamworkmanager.dao.UserDAOImpl">
+	
 	</beans:bean> 
       
 	<authentication-manager>
-    	<authentication-provider user-service-ref="authenticationProvider"/>
+    	<authentication-provider user-service-ref="authenticationProvider">
+    	 	<password-encoder hash="md5"/>
+    	</authentication-provider>
     </authentication-manager>	
 		
 	<!-- 	

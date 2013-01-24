@@ -39,8 +39,8 @@ public class LoginController extends BaseController {
 		if(request.getParameter("login_error") != null) model.addAttribute("error", true);
 		
 		//vložení uživatelů do DB
-		User u = new User( "Michal Klapal", "michal", "password", 7, 1, "michalklapal@gmail.com");
-		userService.saveUser(u);
+		//User u = new User( "Michal Klapal", "michal", "password", 7, 1, "michalklapal@gmail.com");
+		//userService.saveUser(u);
 		//session.beginTransaction();
 		//userService.saveUser(u);
 		//session.getTransaction().commit();
@@ -52,7 +52,7 @@ public class LoginController extends BaseController {
 		System.out.println("Uzivatele:");
 		
 		for ( User usr : (List<User>) result ) {
-			System.out.println( "User (" + usr.getName() + ") : " + usr.getLogin() );
+			System.out.println( "User (" + usr.getUsername() + ")" );
 		}
 				
         //session.getTransaction().commit();

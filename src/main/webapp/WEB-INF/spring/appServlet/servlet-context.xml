@@ -36,7 +36,8 @@
 		<beans:bean id="ModelInterceptor" class="cz.uhk.teamworkmanager.model.ModelInterceptor" />
 	</mvc:interceptors>
 	
-	<context:component-scan base-package="cz.uhk.teamworkmanager.web" />
-	
+	<context:component-scan base-package="cz.uhk.teamworkmanager.web" >
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan> 
 	
 </beans:beans>
