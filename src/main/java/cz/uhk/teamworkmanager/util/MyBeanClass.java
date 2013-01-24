@@ -1,5 +1,13 @@
 package cz.uhk.teamworkmanager.util;
 
+/*
+ * 
+ * 
+ * TESTOVACÍ TŘÍDA
+ * 
+ * 
+ */
+
 public class MyBeanClass {
 
 	String abc;

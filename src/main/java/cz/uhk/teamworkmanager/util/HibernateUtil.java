@@ -3,6 +3,16 @@ package cz.uhk.teamworkmanager.util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/*
+ * 
+ * 
+ * 	TATO TŘÍDA JE NAPROSTO NEPOTŘEBNÁ, LZE JI SMAZAT
+ * 
+ * 
+ * 
+ */
+
+
 public class HibernateUtil {
 
 	private static SessionFactory sessionFactory;

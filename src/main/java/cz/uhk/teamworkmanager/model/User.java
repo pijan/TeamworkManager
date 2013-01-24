@@ -73,14 +73,6 @@ public class User implements Serializable, UserDetails {
 	}
 	
 	
-	public List<GrantedAuthority> setAuthorities(List<Authority> auths) { 
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(); 
-		
-		for (Authority auth : auths) grantedAuthorities.add((GrantedAuthority) new GrantedAuthorityImpl(auth.getUsername())); 
-		
-		return grantedAuthorities; 
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
