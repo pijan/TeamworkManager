@@ -15,9 +15,6 @@ public class BaseEntity implements Serializable {
 	
 	/*
 	 * Základní entita obsahující ID a datum
-	 * 
-	 * K ČEMU JE TO DOBRÉ?
-	 * 
 	 */
 	
 	private Long id;

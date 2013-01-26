@@ -17,7 +17,27 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 			
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
+	<!-- 
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="cz.uhk.teamworkmanager" />
+		<property name="schemaUpdate" value="true" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+	</bean>
+	--> 
+	
+	
+	
 	<context:annotation-config />
     <context:component-scan base-package="cz.uhk.teamworkmanager.dao" />
     <context:component-scan base-package="cz.uhk.teamworkmanager.service" />
@@ -53,7 +73,6 @@
 			</props>
 		</property>
 	</bean>
-				
 				
 	<!--
 	 <tx:annotation-driven transaction-manager="transactionManager"/> 
