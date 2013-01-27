@@ -10,18 +10,17 @@ import cz.uhk.teamworkmanager.dao.UserDAO;
 import cz.uhk.teamworkmanager.model.User;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
     private UserDAO userDAO;
-     
-    @Transactional
-    public void saveUser(User user) {
+        
+    public void save(User user) {
         userDAO.saveUser(user);
     }
  
-    @Transactional
-    public List<User> listUser() {
+    public List<User> list() {
         return userDAO.listUser();
     }
 

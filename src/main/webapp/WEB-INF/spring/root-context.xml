@@ -18,26 +18,6 @@
 			
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<!-- 
-	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="cz.uhk.teamworkmanager" />
-		<property name="schemaUpdate" value="true" />
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-			</props>
-		</property>
-	</bean>
-	--> 
-	
-	
-	
 	<context:annotation-config />
     <context:component-scan base-package="cz.uhk.teamworkmanager.dao" />
     <context:component-scan base-package="cz.uhk.teamworkmanager.service" />
@@ -96,14 +76,12 @@
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 	    <property name="sessionFactory"><ref local="sessionFactory"/></property>
 	</bean>
-		
-	<bean id="myBean" class="cz.uhk.teamworkmanager.util.MyBeanClass">
-		<property name="abc" value="13"/>
-	</bean>
+	
 	
 	<bean id="userService" class="cz.uhk.teamworkmanager.service.UserServiceImpl"></bean>
     <bean id="userDAO" class="cz.uhk.teamworkmanager.dao.UserDAOImpl"></bean>
-	
+	<bean id="noticeService" class="cz.uhk.teamworkmanager.service.NoticeServiceImpl"></bean>
+    <bean id="noticeDAO" class="cz.uhk.teamworkmanager.dao.NoticeDAOImpl"></bean>
 	
 	
 	

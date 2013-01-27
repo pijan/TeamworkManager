@@ -49,7 +49,6 @@ public class User implements Serializable, UserDetails {
 	}
 
 	public String getPassword() {
-		System.out.println("Nekdo cte heslo");
 		return password;
 	}
 

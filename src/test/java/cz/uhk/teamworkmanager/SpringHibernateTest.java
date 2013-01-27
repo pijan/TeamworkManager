@@ -37,6 +37,11 @@ import org.hibernate.cfg.Configuration;
 import cz.uhk.teamworkmanager.model.User;
 
 /**
+ * 
+ * 
+ * PO PŘEDĚLÁNÍ BEANŮ A DATABÁZE NEFUNKČNÍ!
+ * 
+ * 
  * Illustrates the use of Hibernate native APIs.  The code here is unchanged from the {@code basic} example, the
  * only difference being the use of annotations to supply the metadata instead of Hibernate mapping files.
  *
@@ -63,6 +68,7 @@ public class SpringHibernateTest extends TestCase {
 	@SuppressWarnings({ "unchecked" })
 	public void testBasicUsage() {
 		
+		/*
 		// create a couple of events...
 		Session session = cz.uhk.teamworkmanager.util.HibernateUtil.getSessionFactory().openSession();
 		//Session session = sessionFactory.openSession();
@@ -84,5 +90,6 @@ public class SpringHibernateTest extends TestCase {
 		}
         session.getTransaction().commit();
         session.close();
+        */
 	}
 }

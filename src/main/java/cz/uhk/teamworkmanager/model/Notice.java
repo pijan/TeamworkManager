@@ -1,7 +1,5 @@
 package cz.uhk.teamworkmanager.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -24,6 +22,10 @@ public class Notice extends BaseEntity{
 	String calendarDate;
 	String calendarTime;
 	String labels;
+	
+	public Notice() {
+
+	}
 	
 	public Notice(String text) {
 		this.text = text;

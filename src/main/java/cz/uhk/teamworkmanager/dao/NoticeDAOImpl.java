@@ -2,30 +2,34 @@ package cz.uhk.teamworkmanager.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.uhk.teamworkmanager.model.Notice;
 
-public class NoticeDAOImpl extends AbstractDAO implements NoticeDAO {
+@Repository
+@Transactional
+public class NoticeDAOImpl implements NoticeDAO {
 	
-	public NoticeDAOImpl(Session s) {
-		super(s);
-		// TODO Auto-generated constructor stub
-	}
-
+	@Autowired
+    private SessionFactory sessionFactory;
+	
+	
 	@Override
 	public void saveNotice(Notice notice) {
-		session.beginTransaction();
-		session.save(notice);
-		session.getTransaction().commit();
+		
+		sessionFactory.getCurrentSession().save(notice);
+
 	}
 
 	@Override
 	public List<Notice> listNotes() {
-		session.beginTransaction();
-		List result = session.createCriteria(Notice.class).list();
-	    session.getTransaction().commit();
+
+		List<Notice> result = sessionFactory.getCurrentSession().createCriteria(Notice.class).list();
 		return result;
+		
 	}
 	
 }
