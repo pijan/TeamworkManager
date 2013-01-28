@@ -42,6 +42,20 @@ public class UserDAOImpl implements UserDAO {
 		sessionFactory.getCurrentSession().save(user);
 		
 	}
+	
+	public void deleteUser(String name){
+		
+		String hql = "delete from User where username= :username";
+		sessionFactory.getCurrentSession().createQuery(hql).setString("username", name).executeUpdate();
+		
+		hql = "delete from Authority where username= :username";
+		sessionFactory.getCurrentSession().createQuery(hql).setString("username", name).executeUpdate();
+		
+	}
+	
+	public void updateUser(User user){
+		sessionFactory.getCurrentSession().update(user);
+	}
 
 	public List<User> listUser() {
 		

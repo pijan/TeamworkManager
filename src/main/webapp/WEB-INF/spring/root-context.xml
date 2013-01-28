@@ -26,7 +26,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	    
-	    <property name="url" value="jdbc:mysql://146.255.26.15/ppro" />
+	    <property name="url" value="jdbc:mysql://146.255.26.15/ppro?useUnicode=true&amp;characterEncoding=utf-8" />
 	    <property name="username" value="ppro" />
 	    <property name="password" value="ppro" />
 	</bean>
@@ -50,6 +50,8 @@
 				<prop key="current_session_context_class">thread</prop>
                 <prop key="cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+            	<prop key="hibernate.connection.charSet">UTF-8</prop>
 			</props>
 		</property>
 	</bean>
@@ -82,7 +84,8 @@
     <bean id="userDAO" class="cz.uhk.teamworkmanager.dao.UserDAOImpl"></bean>
 	<bean id="noticeService" class="cz.uhk.teamworkmanager.service.NoticeServiceImpl"></bean>
     <bean id="noticeDAO" class="cz.uhk.teamworkmanager.dao.NoticeDAOImpl"></bean>
-	
+	<bean id="authorityService" class="cz.uhk.teamworkmanager.service.AuthorityServiceImpl"></bean>
+    <bean id="authorityDAO" class="cz.uhk.teamworkmanager.dao.AuthorityDAOImpl"></bean>
 	
 	
 </beans>

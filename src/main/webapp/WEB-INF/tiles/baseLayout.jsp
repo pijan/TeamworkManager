@@ -243,6 +243,8 @@
 	<!-- start content -->
 	<div id="content">
 	
+	
+	
 	<!--  start page-heading -->
 	<div id="page-heading">
 		<h1>		
@@ -250,6 +252,9 @@
 		        <c:when test="${springViewName.equals('homepage')}">Dashboard</c:when>
 		        <c:when test="${springViewName.equals('notebook')}">Poznámky</c:when>
 		        <c:when test="${springViewName.equals('notebookDetail')}">Poznámka ${noteName}</c:when>
+		        <c:when test="${springViewName.equals('users')}">Uživatelé</c:when>
+		        <c:when test="${springViewName.equals('usersNew')}">Nový uživatel</c:when>
+		        <c:when test="${springViewName.equals('usersEdit')}">Úprava uživatele ${name}</c:when>
 		        <c:otherwise>${springViewName}</c:otherwise>
 		    </c:choose>
 		</h1>
@@ -274,7 +279,62 @@
 			<!--  start table-content  -->
 			<div id="table-content">
 	
-	
+				<c:if test="${not empty flashMessage}">
+				
+					<c:if test="${flashMessage.getType() == 1}">
+					<!--  start message-green -->
+					<div id="message-green">
+						<table border="0" width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="green-left">${flashMessage.getMessage()}</td>
+							<td class="green-right"><a class="close-green"><img src="resources/images/table/icon_close_green.gif"   alt="" /></a></td>
+						</tr>
+						</table>
+					</div>
+					<!--  end message-green -->
+					</c:if>
+					
+					<c:if test="${flashMessage.getType() == 2}">
+					<!--  start message-yellow -->
+					<div id="message-yellow">
+						<table border="0" width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="yellow-left">${flashMessage.getMessage()}</td>
+							<td class="yellow-right"><a class="close-yellow"><img src="resources/images/table/icon_close_yellow.gif"   alt="" /></a></td>
+						</tr>
+						</table>
+					</div>
+					<!--  end message-yellow -->
+					</c:if>
+					
+					<c:if test="${flashMessage.getType() == 3}">
+					<!--  start message-blue -->
+					<div id="message-blue">
+						<table border="0" width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="blue-left">${flashMessage.getMessage()}</td>
+							<td class="blue-right"><a class="close-blue"><img src="resources/images/table/icon_close_blue.gif"   alt="" /></a></td>
+						</tr>
+						</table>
+					</div>
+					<!--  end message-blue -->
+					</c:if>			
+					
+					<c:if test="${flashMessage.getType() == 4}">
+					<!--  start message-red -->
+					<div id="message-red">
+					<table border="0" width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="red-left">${flashMessage.getMessage()}</td>
+						<td class="red-right"><a class="close-red"><img src="resources/images/table/icon_close_red.gif"   alt="" /></a></td>
+					</tr>
+					</table>
+					</div>
+					<!--  end message-red -->
+					</c:if>				
+				
+				</c:if>
+	 
 				<tiles:insertAttribute name="content" />
 					
 		

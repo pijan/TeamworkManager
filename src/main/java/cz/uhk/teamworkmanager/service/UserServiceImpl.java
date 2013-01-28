@@ -20,6 +20,18 @@ public class UserServiceImpl implements UserService {
         userDAO.saveUser(user);
     }
  
+    public void delete(String name){
+    	userDAO.deleteUser(name);
+    }
+    
+    public User get(String name){
+    	return (User) userDAO.loadUserByUsername(name);
+    }
+    
+    public void update(User user){
+    	userDAO.updateUser(user);
+    }
+    
     public List<User> list() {
         return userDAO.listUser();
     }

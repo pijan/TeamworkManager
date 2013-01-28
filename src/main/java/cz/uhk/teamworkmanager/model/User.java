@@ -26,6 +26,10 @@ public class User implements Serializable, UserDetails {
 	String password;
 	int enabled;
 	
+	String name;
+	String surname;
+	String email;
+	
 	@OneToOne
     @JoinColumn(name="username")
     private Authority authority;
@@ -34,10 +38,19 @@ public class User implements Serializable, UserDetails {
 		
 	}
 	
-	public User(String username, String password, int enabled){
+	public User(String username, String password){
 		this.username = username;
 		this.password = password;
-		this.enabled = enabled;
+		this.enabled = 1;
+	}
+	
+	public User(String username, String password, String name, String surname, String email){
+		this.username = username;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.password = password;
+		this.enabled = 1;
 	}
 	
 	public String getUsername() {
@@ -55,6 +68,30 @@ public class User implements Serializable, UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public int getEnabled() {
 		return enabled;
@@ -70,15 +107,7 @@ public class User implements Serializable, UserDetails {
 				+ this.getPassword() + ", "
 				+ this.getEnabled() + "\n";
 	}
-	
-	
-	public List<GrantedAuthority> setAuthorities(List<Authority> auths) { 
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(); 
-		
-		for (Authority auth : auths) grantedAuthorities.add((GrantedAuthority) new GrantedAuthorityImpl(auth.getUsername())); 
-		
-		return grantedAuthorities; 
-	}
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

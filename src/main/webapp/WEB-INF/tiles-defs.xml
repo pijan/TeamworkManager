@@ -12,13 +12,37 @@
 
 	<definition name="homepage" extends="baseLayout"></definition>
 
+	<!-- 
 	<definition name="notebook" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/views/notebook.jsp"/>
 	</definition>
 	<definition name="notebookDetail" extends="baseLayout">
 		<put-attribute name="content" value="/WEB-INF/views/notebookDetail.jsp"/>
 	</definition>
-
+	
+	<definition name="users" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/users.jsp"/>
+	</definition>
+	<definition name="usersNew" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/usersNew.jsp"/>
+	</definition>
+	<definition name="usersEdit" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/usersEdit.jsp"/>
+	</definition>
+	<definition name="usersDel" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/usersDel.jsp"/>
+	</definition>
+	-->
+	
 	<definition name="login" template="/WEB-INF/views/login.jsp"></definition>
+	
+	<!-- 
+	Pokud neni definovano jinak, automaticky pomoci wildcard pripoji obsah souboru 
+	se shodnym nazvem jako definice (string co vraci metody v controllerech) 
+	-->	
+	<definition name="*" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
+	</definition>
+	
 	
 </tiles-definitions>

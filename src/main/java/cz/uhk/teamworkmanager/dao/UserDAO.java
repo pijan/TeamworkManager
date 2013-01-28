@@ -8,7 +8,12 @@ import cz.uhk.teamworkmanager.model.User;
 
 public interface UserDAO extends UserDetailsService {
 
-	public void saveUser(User user) ;
+	public void saveUser(User user);
+	
+	public void deleteUser(String name);
+	
+	public void updateUser(User user);
+	
 	public List<User> listUser() ;
 	
 }

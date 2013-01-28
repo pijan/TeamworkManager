@@ -75,19 +75,21 @@
 		</li>
 		</ul>
 		
+		<c:if test="${user.getAuthorities().get(0) == 'ROLE_ADMIN'}">
 		<div class="nav-divider">&nbsp;</div>
 		
-		<ul ${springViewName=="users" ? 'class="current"' : 'class="select"'}><li><a href="#nogo"><b>Uživatelé</b><!--[if IE 7]><!--></a><!--<![endif]-->
+		<ul ${springViewName=="users" or springViewName=="usersNew" or springViewName=="usersEdit" ? 'class="current"' : 'class="select"'}><li><a href="users/"><b>Uživatelé</b><!--[if IE 7]><!--></a><!--<![endif]-->
 		<!--[if lte IE 6]><table><tr><td><![endif]-->
-		<div class="select_sub ${springViewName=='users' ? 'show' : ''}">
+		<div class="select_sub ${springViewName=='users' or springViewName=='usersNew' or springViewName=='usersEdit'? 'show' : ''}">
 			<ul class="sub">
-				<li ${springViewName=='users' ? 'class="sub_show"' : ''}><a href="#nogo">Seznam uživatelů</a></li>
-				<li><a href="#nogo">Nový uživatel</a></li>
+				<li ${springViewName=='users' ? 'class="sub_show"' : ''}><a href="users/">Seznam uživatelů</a></li>
+				<li ${springViewName=='usersNew' ? 'class="sub_show"' : ''}><a href="users/new">Nový uživatel</a></li>
 			</ul>
 		</div>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]-->
 		</li>
 		</ul>
+		</c:if>
 		
 		<div class="clear"></div>
 		</div>
