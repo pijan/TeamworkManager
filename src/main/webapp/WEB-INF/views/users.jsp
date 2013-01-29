@@ -14,14 +14,14 @@
 		
 		<c:forEach var="o" items="${userList}" varStatus="status">
             <tr <c:if test="${status.index%2==1}">class="alternate-row"</c:if>>
-                <td>${o.getSurname()}</td>
-                <td>${o.getName()}</td>
-                <td>${o.getUsername()}</td>
-                <td>${o.getEmail()}</td>
-                <td>${o.getAuthority().getAuthority()}</td>
+                <td>${o.surname}</td>
+                <td>${o.name}</td>
+                <td>${o.username}</td>
+                <td>${o.email}</td>
+                <td>${o.authority.authority}</td>
                 <td class="options-width">
-					<a href="users/edit/${o.getUsername()}" title="Upravit" class="icon-1 info-tooltip"></a>
-					<a href="users/del/${o.getUsername()}" title="Smazat" class="icon-2 info-tooltip"></a>
+					<a href="users/edit/${o.username}" title="Upravit" class="icon-1 info-tooltip"></a>
+					<a href="users/del/${o.username}" title="Smazat" class="icon-2 info-tooltip" onclick="if(!confirm('Opravdu smazat?')) return false;"></a>
 				</td>   
             </tr>
         </c:forEach>

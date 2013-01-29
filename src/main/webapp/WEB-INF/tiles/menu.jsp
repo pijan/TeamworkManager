@@ -75,7 +75,7 @@
 		</li>
 		</ul>
 		
-		<c:if test="${user.getAuthorities().get(0) == 'ROLE_ADMIN'}">
+		<c:if test="${user.authorities[0] == 'ROLE_ADMIN'}">
 		<div class="nav-divider">&nbsp;</div>
 		
 		<ul ${springViewName=="users" or springViewName=="usersNew" or springViewName=="usersEdit" ? 'class="current"' : 'class="select"'}><li><a href="users/"><b>Uživatelé</b><!--[if IE 7]><!--></a><!--<![endif]-->

@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -12,15 +13,20 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import cz.uhk.teamworkmanager.model.BasicGroup;
+import cz.uhk.teamworkmanager.model.ExtendedGroup;
 import cz.uhk.teamworkmanager.model.Authority;
 import cz.uhk.teamworkmanager.model.Notice;
 import cz.uhk.teamworkmanager.model.User;
@@ -40,9 +46,17 @@ public class UsersController {
 	
 
 	@RequestMapping(value = "/action/addUser", method = RequestMethod.POST)
-	public String addUserAction(@ModelAttribute("usersNew") User user, BindingResult result, final RedirectAttributes redirectAttrs) {
+	public String addUserAction(/*@ModelAttribute("usersNew")*/@Validated({ExtendedGroup.class}) User user, BindingResult result, final RedirectAttributes redirectAttrs) {
 				
-		Authority auth = new Authority(user.getUsername(), result.getFieldValue("authority").toString());
+		if (result.hasErrors()) {
+			System.out.println("FOUND "+result.getErrorCount()+" ERRORS");
+			System.out.println(result.getFieldErrors().toString());
+			
+			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_ERROR, "Odeslaný formulář nesplňuje validační podmínky"));
+		    return "redirect:/users/";
+		  }
+		
+		Authority auth = new Authority(user.getUsername(), ((Authority)result.getFieldValue("authority")).getAuthority());
 		
 		PasswordEncoder encoder = new Md5PasswordEncoder();
 		user.setPassword(encoder.encodePassword(user.getPassword(), null));
@@ -61,22 +75,32 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = "/action/editUser", method = RequestMethod.POST)
-	public String editUserAction(@ModelAttribute("usersEdit") User user, BindingResult result, final RedirectAttributes redirectAttrs) {
-				
-		Authority auth = new Authority(user.getUsername(), result.getFieldValue("authority").toString());
+	public String editUserAction(/*@ModelAttribute("usersEdit") User user,*/ @Validated({BasicGroup.class}) User user, BindingResult result, final RedirectAttributes redirectAttrs) {
 		
-		/*
-		PasswordEncoder encoder = new Md5PasswordEncoder();
-		user.setPassword(encoder.encodePassword(user.getPassword(), null));
-		*/
-		user.setEnabled((result.getFieldValue("enabled").toString() == "true") ? 1 : 0);
+		if (result.hasErrors()) {
+			System.out.println("FOUND "+result.getErrorCount()+" ERRORS");
+			System.out.println(result.getFieldErrors().toString());
+			
+			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_ERROR, "Odeslaný formulář nesplňuje validační podmínky"));
+			
+		    return "redirect:/users/edit/"+user.getUsername();
+		  }
+		  
+		Authority auth = new Authority(user.getUsername(), ((Authority)result.getFieldValue("authority")).getAuthority());
 				
-		System.out.println(result.getFieldValue("authority").toString()); 
+		if (user.getPassword() != ""){
+			PasswordEncoder encoder = new Md5PasswordEncoder();
+			user.setPassword(encoder.encodePassword(user.getPassword(), null));
+		}else{
+			user.setPassword(userService.get(user.getUsername()).getPassword());
+		}
+		
+		user.setEnabled((result.getFieldValue("enabled").toString() == "true") ? 1 : 0);
 		
 		try{
 			userService.update(user); 
 			authorityService.update(auth);
-			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_OK, "Uživatel " + user.getName() + " byl úspěšně upraven"));
+			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_OK, "Uživatel " + user.getUsername() + " byl úspěšně upraven"));
 		}
 		catch(Exception e){
 			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_ERROR, "Došlo k chybě, uživatele se nepodařilo řádně upravit"));
@@ -99,12 +123,8 @@ public class UsersController {
 	@RequestMapping(value = "/edit/{name}", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable String name, Model model) {
 		
-		//model.addAttribute("userName", name);		
-		//return "usersEdit";
-		
 		User u = userService.get(name);
-		u.setAuthority(new Authority(u.getUsername(), "ROLE_ADMIN"));
-		 
+		 		
 		return new ModelAndView("usersEdit", "command", u);
 	}
 	

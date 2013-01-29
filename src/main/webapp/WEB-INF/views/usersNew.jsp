@@ -7,25 +7,29 @@
 		<tr>
 			<th valign="top">Login:</th>
 			<td><form:input path="username" class="inp-form"/></td>
-			<td></td>
+			<td>
+			<div class="error-left"></div>
+			<div class="error-inner">*</div>
+			</td>
 		</tr>
 		<tr>
 			<th valign="top">Heslo:</th>
 			<td><form:input path="password" type="password" class="inp-form"/></td>
 			<td>
-			<!--
 			<div class="error-left"></div>
-			<div class="error-inner">This field is required.</div>
-			-->
+			<div class="error-inner">*</div>
 			</td>
 		</tr>
 		<tr>
 			<th valign="top">Email:</th>
 			<td><form:input path="email" class="inp-form"/></td>
-			<td></td>
+			<td>
+			<div class="error-left"></div>
+			<div class="error-inner">*</div>
+			</td>
 		</tr>
 		<tr>
-			<th valign="top">Křestní jméno:</th>
+			<th valign="top">Křestní jméno:</th>
 			<td><form:input path="name" class="inp-form"/></td>
 			<td></td>
 		</tr>
@@ -38,7 +42,7 @@
 		<tr>
 		<th valign="top">Role:</th>
 		<td>	
-		<form:select path="authority" class="styledselect_form_1">
+		<form:select path="authority.authority" class="styledselect_form_1">
 			<option value="ROLE_USER">ROLE_USER</option>
 			<option value="ROLE_ADMIN">ROLE_ADMIN</option>
 		</form:select>

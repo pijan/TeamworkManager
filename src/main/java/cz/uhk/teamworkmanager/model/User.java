@@ -10,10 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import cz.uhk.teamworkmanager.web.UsersController;
 
 @Entity
 @Table( name = "users" )
@@ -22,13 +26,21 @@ public class User implements Serializable, UserDetails {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	String username;
-	String password;
-	int enabled;
+	@NotEmpty(groups = {BasicGroup.class, ExtendedGroup.class})
+    @Size(min = 1, max = 20, groups = {BasicGroup.class, ExtendedGroup.class})
+	private String username;
 	
-	String name;
-	String surname;
-	String email;
+	@NotEmpty(groups = {ExtendedGroup.class})
+    @Size(min = 1, max = 32,groups = {ExtendedGroup.class})
+	private String password;
+	
+	private int enabled;
+	
+	private String name;
+	private String surname;
+	
+	@NotEmpty(groups = {BasicGroup.class, ExtendedGroup.class})
+	private String email;
 	
 	@OneToOne
     @JoinColumn(name="username")

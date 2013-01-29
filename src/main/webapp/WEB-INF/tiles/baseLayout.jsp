@@ -20,166 +20,43 @@
 	
 	<!--  jquery core -->
 	<script src="<c:url value="/resources/js/jquery/jquery-1.4.1.min.js" />" type="text/javascript"></script>
-	 
 	<!--  checkbox styling script -->
 	<script src="<c:url value="/resources/js/jquery/ui.core.js" />" type="text/javascript"></script>
 	<script src="<c:url value="/resources/js/jquery/ui.checkbox.js" />" type="text/javascript"></script>
 	<script src="<c:url value="/resources/js/jquery/jquery.bind.js" />" type="text/javascript"></script>
-	<script type="text/javascript">
-	$(function(){
-		$('input').checkBox();
-		$('#toggle-all').click(function(){
-	 	$('#toggle-all').toggleClass('toggle-checked');
-		$('#mainform input[type=checkbox]').checkBox('toggle');
-		return false;
-		});
-	});
-	</script>  
-	
-	
+			
 	<![if !IE 7]>
-	
 	<!--  styled select box script version 1 -->
 	<script src="<c:url value="/resources/js/jquery/jquery.selectbox-0.5.js" />" type="text/javascript"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$('.styledselect').selectbox({ inputClass: "selectbox_styled" });
 	});
-	</script>
-	 
-	
+	</script>	
 	<![endif]>
-	
 	
 	<!--  styled select box script version 2 --> 
 	<script src="<c:url value="/resources/js/jquery/jquery.selectbox-0.5_style_2.js" />" type="text/javascript"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('.styledselect_form_1').selectbox({ inputClass: "styledselect_form_1" });
-		$('.styledselect_form_2').selectbox({ inputClass: "styledselect_form_2" });
-	});
-	</script>
-	
 	<!--  styled select box script version 3 --> 
 	<script src="<c:url value="/resources/js/jquery/jquery.selectbox-0.5_style_2.js" />" type="text/javascript"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('.styledselect_pages').selectbox({ inputClass: "styledselect_pages" });
-	});
-	</script>
-	
 	<!--  styled file upload script --> 
 	<script src="<c:url value="/resources/js/jquery/jquery.filestyle.js" />" type="text/javascript"></script>
-	<script type="text/javascript" charset="utf-8">
-	$(function() {
-		$("input.file_1").filestyle({ 
-		image: "resources/images/forms/upload_file.gif",
-		imageheight : 29,
-		imagewidth : 78,
-		width : 300
-		});
-	});
-	</script>
-	
 	<!-- Custom jquery scripts -->
 	<script src="<c:url value="/resources/js/jquery/custom_jquery.js" />" type="text/javascript"></script>
 	 
 	<!-- Tooltips -->
 	<script src="<c:url value="/resources/js/jquery/jquery.tooltip.js" />" type="text/javascript"></script>
 	<script src="<c:url value="/resources/js/jquery/jquery.dimensions.js" />" type="text/javascript"></script>
-	<script type="text/javascript">
-	$(function() {
-		$('a.info-tooltip ').tooltip({
-			track: true,
-			delay: 0,
-			fixPNG: true, 
-			showURL: false,
-			showBody: " - ",
-			top: -35,
-			left: 5
-		});
-	});
-	</script> 
 	
 	<!--  date picker script -->
 	<link rel="stylesheet" href="<c:url value="/resources/css/datePicker.css" />" type="text/css" />
 	<script src="<c:url value="/resources/js/jquery/date.js" />" type="text/javascript"></script>
 	<script src="<c:url value="/resources/js/jquery/jquery.datePicker.js" />" type="text/javascript"></script>
-	<script type="text/javascript" charset="utf-8">
-	        $(function()
-	{
-	
-	// initialise the "Select date" link
-	$('#date-pick')
-		.datePicker(
-			// associate the link with a date picker
-			{
-				createButton:false,
-				startDate:'01/01/2005',
-				endDate:'31/12/2020'
-			}
-		).bind(
-			// when the link is clicked display the date picker
-			'click',
-			function()
-			{
-				updateSelects($(this).dpGetSelected()[0]);
-				$(this).dpDisplay();
-				return false;
-			}
-		).bind(
-			// when a date is selected update the SELECTs
-			'dateSelected',
-			function(e, selectedDate, $td, state)
-			{
-				updateSelects(selectedDate);
-			}
-		).bind(
-			'dpClosed',
-			function(e, selected)
-			{
-				updateSelects(selected[0]);
-			}
-		);
-		
-	var updateSelects = function (selectedDate)
-	{
-		var selectedDate = new Date(selectedDate);
-		$('#d option[value=' + selectedDate.getDate() + ']').attr('selected', 'selected');
-		$('#m option[value=' + (selectedDate.getMonth()+1) + ']').attr('selected', 'selected');
-		$('#y option[value=' + (selectedDate.getFullYear()) + ']').attr('selected', 'selected');
-	}
-	// listen for when the selects are changed and update the picker
-	$('#d, #m, #y')
-		.bind(
-			'change',
-			function()
-			{
-				var d = new Date(
-							$('#y').val(),
-							$('#m').val()-1,
-							$('#d').val()
-						);
-				$('#date-pick').dpSetSelected(d.asString());
-			}
-		);
-	
-	// default the position of the selects to today
-	var today = new Date();
-	updateSelects(today.getTime());
-	
-	// and update the datePicker to reflect it...
-	$('#d').trigger('change');
-	});
-	</script>
 	
 	<!-- MUST BE THE LAST SCRIPT IN <HEAD></HEAD></HEAD> png fix -->
 	<script src="<c:url value="/resources/js/jquery/jquery.pngFix.pack.js" />" type="text/javascript"></script>
-	<script type="text/javascript">
-	$(document).ready(function(){
-	$(document).pngFix( );
-	});
-	</script>
+
+	<script src="<c:url value="/resources/js/scripts.js" />" type="text/javascript"></script>
 
 </head>
 <body>
@@ -249,12 +126,12 @@
 	<div id="page-heading">
 		<h1>		
 			<c:choose>
-		        <c:when test="${springViewName.equals('homepage')}">Dashboard</c:when>
-		        <c:when test="${springViewName.equals('notebook')}">Poznámky</c:when>
-		        <c:when test="${springViewName.equals('notebookDetail')}">Poznámka ${noteName}</c:when>
-		        <c:when test="${springViewName.equals('users')}">Uživatelé</c:when>
-		        <c:when test="${springViewName.equals('usersNew')}">Nový uživatel</c:when>
-		        <c:when test="${springViewName.equals('usersEdit')}">Úprava uživatele ${name}</c:when>
+		    	<c:when test="${springViewName=='homepage'}">Dashboard</c:when>
+		        <c:when test="${springViewName=='notebook'}">Poznámky</c:when>
+		        <c:when test="${springViewName=='notebookDetail'}">Poznámka ${noteName}</c:when>
+		        <c:when test="${springViewName=='users'}">Správa uživatelů</c:when>
+		        <c:when test="${springViewName=='usersNew'}">Nový uživatel</c:when>
+		        <c:when test="${springViewName=='usersEdit'}">Úprava uživatele ${name}</c:when>
 		        <c:otherwise>${springViewName}</c:otherwise>
 		    </c:choose>
 		</h1>
@@ -281,12 +158,12 @@
 	
 				<c:if test="${not empty flashMessage}">
 				
-					<c:if test="${flashMessage.getType() == 1}">
+					<c:if test="${flashMessage.type == 1}">
 					<!--  start message-green -->
 					<div id="message-green">
 						<table border="0" width="100%" cellpadding="0" cellspacing="0">
 						<tr>
-							<td class="green-left">${flashMessage.getMessage()}</td>
+							<td class="green-left">${flashMessage.message}</td>
 							<td class="green-right"><a class="close-green"><img src="resources/images/table/icon_close_green.gif"   alt="" /></a></td>
 						</tr>
 						</table>
@@ -294,12 +171,12 @@
 					<!--  end message-green -->
 					</c:if>
 					
-					<c:if test="${flashMessage.getType() == 2}">
+					<c:if test="${flashMessage.type == 2}">
 					<!--  start message-yellow -->
 					<div id="message-yellow">
 						<table border="0" width="100%" cellpadding="0" cellspacing="0">
 						<tr>
-							<td class="yellow-left">${flashMessage.getMessage()}</td>
+							<td class="yellow-left">${flashMessage.message}</td>
 							<td class="yellow-right"><a class="close-yellow"><img src="resources/images/table/icon_close_yellow.gif"   alt="" /></a></td>
 						</tr>
 						</table>
@@ -307,12 +184,12 @@
 					<!--  end message-yellow -->
 					</c:if>
 					
-					<c:if test="${flashMessage.getType() == 3}">
+					<c:if test="${flashMessage.type == 3}">
 					<!--  start message-blue -->
 					<div id="message-blue">
 						<table border="0" width="100%" cellpadding="0" cellspacing="0">
 						<tr>
-							<td class="blue-left">${flashMessage.getMessage()}</td>
+							<td class="blue-left">${flashMessage.message}</td>
 							<td class="blue-right"><a class="close-blue"><img src="resources/images/table/icon_close_blue.gif"   alt="" /></a></td>
 						</tr>
 						</table>
@@ -320,12 +197,12 @@
 					<!--  end message-blue -->
 					</c:if>			
 					
-					<c:if test="${flashMessage.getType() == 4}">
+					<c:if test="${flashMessage.type == 4}">
 					<!--  start message-red -->
 					<div id="message-red">
 					<table border="0" width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-						<td class="red-left">${flashMessage.getMessage()}</td>
+						<td class="red-left">${flashMessage.message}</td>
 						<td class="red-right"><a class="close-red"><img src="resources/images/table/icon_close_red.gif"   alt="" /></a></td>
 					</tr>
 					</table>
