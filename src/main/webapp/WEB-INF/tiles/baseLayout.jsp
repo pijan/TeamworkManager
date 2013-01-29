@@ -74,7 +74,7 @@
 		</div>
 		<!-- end logo -->
 		
-		<!--  start top-search 
+		<!--  start top-search
 		<div id="top-search">
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
@@ -95,6 +95,9 @@
 			</table>
 		</div>
 	 	<!--  end top-search -->
+	 	<div id="top-user">
+			Přihlášený uživatel: <a href="users/profile">${user.name}</a>
+	 	</div>
 	 	<div class="clear"></div>
 	
 	</div>
@@ -132,6 +135,7 @@
 		        <c:when test="${springViewName=='users'}">Správa uživatelů</c:when>
 		        <c:when test="${springViewName=='usersNew'}">Nový uživatel</c:when>
 		        <c:when test="${springViewName=='usersEdit'}">Úprava uživatele ${name}</c:when>
+		        <c:when test="${springViewName=='usersProfile'}">Uživatelský profil (${user.name})</c:when>
 		        <c:otherwise>${springViewName}</c:otherwise>
 		    </c:choose>
 		</h1>

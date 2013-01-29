@@ -83,9 +83,6 @@
 	<bean id="userService" class="cz.uhk.teamworkmanager.service.UserServiceImpl"></bean>
     <bean id="userDAO" class="cz.uhk.teamworkmanager.dao.UserDAOImpl"></bean>
 	<bean id="noticeService" class="cz.uhk.teamworkmanager.service.NoticeServiceImpl"></bean>
-    <bean id="noticeDAO" class="cz.uhk.teamworkmanager.dao.NoticeDAOImpl"></bean>
-	<bean id="authorityService" class="cz.uhk.teamworkmanager.service.AuthorityServiceImpl"></bean>
-    <bean id="authorityDAO" class="cz.uhk.teamworkmanager.dao.AuthorityDAOImpl"></bean>
-	
+    <bean id="noticeDAO" class="cz.uhk.teamworkmanager.dao.NoticeDAOImpl"></bean>	
 	
 </beans>

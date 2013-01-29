@@ -42,17 +42,17 @@ public class User implements Serializable, UserDetails {
 	@NotEmpty(groups = {BasicGroup.class, ExtendedGroup.class})
 	private String email;
 	
-	@OneToOne
-    @JoinColumn(name="username")
-    private Authority authority;
+	@NotEmpty
+    private String authority;
 	
 	public User(){
 		
 	}
 	
-	public User(String username, String password){
+	public User(String username, String password, String email){
 		this.username = username;
 		this.password = password;
+		this.email = email;
 		this.enabled = 1;
 	}
 	
@@ -126,7 +126,7 @@ public class User implements Serializable, UserDetails {
 		
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		
-		grantedAuthorities.add(new GrantedAuthorityImpl(this.authority.getAuthority()));
+		grantedAuthorities.add(new GrantedAuthorityImpl(this.getAuthority()));
 		
 		return grantedAuthorities; 
 	}
@@ -155,11 +155,11 @@ public class User implements Serializable, UserDetails {
 		return true;
 	}
 	
-	public Authority getAuthority() {
+	public String getAuthority() {
 		return authority;
 	}
 
-	public void setAuthority(Authority authority) {
+	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
 	

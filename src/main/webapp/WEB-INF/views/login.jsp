@@ -51,7 +51,7 @@ $(document).pngFix( );
 		</tr>
 		<tr>
 			<th></th>
-			<td valign="top"><input type="checkbox" class="checkbox-size" id="login-check" /><label for="login-check">Remember me</label></td>
+			<td valign="top">&nbsp;<%--<input type="checkbox" class="checkbox-size" id="login-check" /><label for="login-check">Remember me</label> --%></td>
 		</tr>
 		<tr>
 			<th></th>

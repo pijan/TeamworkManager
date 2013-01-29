@@ -11,6 +11,8 @@
     <http pattern="/login/*" security="none"/>
     
     <http use-expressions="true">
+	    <intercept-url pattern="/users/action/editProfile" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
+	    <intercept-url pattern="/users/profile" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
 	    <intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" />
 	    <intercept-url pattern="/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
 	    <form-login login-page='/login/' authentication-failure-url='/login/?login_error'/>

@@ -9,7 +9,7 @@
 		<div id="nav-right">
 		
 			<div class="nav-divider">&nbsp;</div>
-			<div class="showhide-account"><img src="resources/images/shared/nav/nav_myaccount.gif" width="93" height="14" alt="" /></div>
+			<div class="showhide-account"><a href="users/profile"><img src="resources/images/shared/nav/nav_myaccount.gif" width="93" height="14" alt="" /></a></div>
 			<div class="nav-divider">&nbsp;</div>
 			<a href="j_spring_security_logout" id="logout"><img src="resources/images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
 			<div class="clear">&nbsp;</div>

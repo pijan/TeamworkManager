@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,10 +29,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import cz.uhk.teamworkmanager.model.BasicGroup;
 import cz.uhk.teamworkmanager.model.ExtendedGroup;
-import cz.uhk.teamworkmanager.model.Authority;
 import cz.uhk.teamworkmanager.model.Notice;
 import cz.uhk.teamworkmanager.model.User;
-import cz.uhk.teamworkmanager.service.AuthorityService;
 import cz.uhk.teamworkmanager.service.NoticeService;
 import cz.uhk.teamworkmanager.service.UserService;
 import cz.uhk.teamworkmanager.util.FlashMessage;
@@ -41,8 +41,6 @@ public class UsersController {
 
 	@Autowired
     UserService userService;
-	@Autowired
-	AuthorityService authorityService;
 	
 
 	@RequestMapping(value = "/action/addUser", method = RequestMethod.POST)
@@ -56,15 +54,17 @@ public class UsersController {
 		    return "redirect:/users/";
 		  }
 		
-		Authority auth = new Authority(user.getUsername(), ((Authority)result.getFieldValue("authority")).getAuthority());
+		//Authority auth = new Authority(user.getUsername(), ((Authority)result.getFieldValue("authority")).getAuthority());
 		
 		PasswordEncoder encoder = new Md5PasswordEncoder();
 		user.setPassword(encoder.encodePassword(user.getPassword(), null));
 		user.setEnabled((result.getFieldValue("enabled").toString() == "true") ? 1 : 0);
 		
+		System.out.println(user.getEmail());
+		
 		try{
 			userService.save(user); 
-			authorityService.save(auth);
+			//authorityService.save(auth);
 			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_OK, "Uživatel " + user.getName() + " byl úspěšně přidán"));
 		}
 		catch(Exception e){
@@ -86,7 +86,7 @@ public class UsersController {
 		    return "redirect:/users/edit/"+user.getUsername();
 		  }
 		  
-		Authority auth = new Authority(user.getUsername(), ((Authority)result.getFieldValue("authority")).getAuthority());
+		//Authority auth = new Authority(user.getUsername(), ((Authority)result.getFieldValue("authority")).getAuthority());
 				
 		if (user.getPassword() != ""){
 			PasswordEncoder encoder = new Md5PasswordEncoder();
@@ -99,7 +99,7 @@ public class UsersController {
 		
 		try{
 			userService.update(user); 
-			authorityService.update(auth);
+			//authorityService.update(auth);
 			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_OK, "Uživatel " + user.getUsername() + " byl úspěšně upraven"));
 		}
 		catch(Exception e){
@@ -107,6 +107,37 @@ public class UsersController {
 		}
 		
 		return "redirect:/users/";
+	}
+	
+	
+	@RequestMapping(value = "/action/editProfile", method = RequestMethod.POST)
+	public String editProfileAction(/*@ModelAttribute("usersEdit") User user,*/ @Validated({BasicGroup.class}) User user, BindingResult result, final RedirectAttributes redirectAttrs) {
+		
+		if (result.hasErrors()) {
+			System.out.println("FOUND "+result.getErrorCount()+" ERRORS");
+			System.out.println(result.getFieldErrors().toString());
+			
+			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_ERROR, "Odeslaný formulář nesplňuje validační podmínky"));
+			
+		    return "redirect:/users/profile";
+		  }
+		  
+		if (user.getPassword() != ""){
+			PasswordEncoder encoder = new Md5PasswordEncoder();
+			user.setPassword(encoder.encodePassword(user.getPassword(), null));
+		}else{
+			user.setPassword(userService.get(user.getUsername()).getPassword());
+		}
+		
+		try{
+			userService.update(user); 
+			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_OK, "Váš profil byl úspěšně upraven"));
+		}
+		catch(Exception e){
+			redirectAttrs.addFlashAttribute("FlashMessage", new FlashMessage(FlashMessage.MESSAGE_ERROR, "Došlo k chybě, profil se nepodařilo řádně upravit"));
+		}
+		
+		return "redirect:/users/profile";
 	}
 			
 	
@@ -150,11 +181,25 @@ public class UsersController {
 	public String userList(@ModelAttribute("FlashMessage") final FlashMessage flashMessage, Model model) {
 		
 		List<User> result = userService.list();
-		 
+				 
 		model.addAttribute("userList", result);
 		model.addAttribute("flashMessage", flashMessage); 
 				
 		return "users"; 
+	} 
+	
+	
+	
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView userProfile(@ModelAttribute("FlashMessage") final FlashMessage flashMessage, Model model) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userService.get(auth.getName());
+		
+		model.addAttribute("flashMessage", flashMessage); 
+		
+		return new ModelAndView("usersProfile", "command", u);
+		 
 	} 
 	
 }

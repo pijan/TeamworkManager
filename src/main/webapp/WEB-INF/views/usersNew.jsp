@@ -42,7 +42,7 @@
 		<tr>
 		<th valign="top">Role:</th>
 		<td>	
-		<form:select path="authority.authority" class="styledselect_form_1">
+		<form:select path="authority" class="styledselect_form_1">
 			<option value="ROLE_USER">ROLE_USER</option>
 			<option value="ROLE_ADMIN">ROLE_ADMIN</option>
 		</form:select>

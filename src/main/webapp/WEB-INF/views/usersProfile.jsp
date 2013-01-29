@@ -2,8 +2,10 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<form:form method="post" action="users/action/editUser">
+<form:form method="post" action="users/action/editProfile">
 	<form:hidden path="username" />
+	<form:hidden path="authority" />
+	<form:hidden path="enabled" />
 	
 		<table border="0" cellpadding="0" cellspacing="0"  id="id-form">	
 		<tr>
@@ -23,29 +25,13 @@
 			</td>
 		</tr>
 		<tr>
-			<th valign="top">Křestní jméno:</th>
+			<th valign="top">Křestní­ jméno:</th>
 			<td><form:input path="name" class="inp-form"/></td>
 			<td></td>
 		</tr>
 		<tr>
 			<th valign="top">Příjmení:</th>
 			<td><form:input path="surname" class="inp-form"/></td>
-			<td></td>
-		</tr>
-				 
-		<tr>
-		<th valign="top">Role:</th>
-		<td>	
-		<form:select path="authority" class="styledselect_form_1">
-			<form:option value="ROLE_USER" label="ROLE_USER" />
-			<form:option value="ROLE_ADMIN" label="ROLE_ADMIN" />
-		</form:select>
-		</td>
-		<td></td>
-		</tr>
-		<tr>
-			<th valign="top">Aktivní:</th>
-			<td><form:checkbox path="enabled" value="1" class="inp-form" checked="true"/></td>
 			<td></td>
 		</tr>
 		<tr>
