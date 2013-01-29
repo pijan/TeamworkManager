@@ -13,6 +13,7 @@
         <mapping class="cz.uhk.teamworkmanager.model.Event"/>
         <mapping class="cz.uhk.teamworkmanager.model.Notice"/>
         <mapping class="cz.uhk.teamworkmanager.model.Task"/>
+        <mapping class="cz.uhk.teamworkmanager.model.Comment"/>
 
     </session-factory>
 

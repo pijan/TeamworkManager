@@ -1,6 +1,7 @@
 package cz.uhk.teamworkmanager.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,12 +14,16 @@ import org.hibernate.annotations.GenericGenerator;
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/*
-	 * Základní entita obsahující ID a datum
+	 * Základní entita obsahující ID a datum+cas vytvoreni a posledni zmeny
 	 */
 	
 	private Long id;
-	private String date;
+	private Timestamp dateCreated;
 	
 	//konstruktor
 	public BaseEntity(){
@@ -37,18 +42,16 @@ public class BaseEntity implements Serializable {
 		this.id = id;
 	}
 	
-	public String getDate(){
-		return this.date;
-	}
-	
-	public void setDate(String date){
-		//vrací čas a datum poslední změny
-		this.date = date;
-	}
-	
-	
 	public String toString(){
 		return "BaseEntity.id="+this.getId().toString();
+	}
+	
+	public Timestamp getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 }
